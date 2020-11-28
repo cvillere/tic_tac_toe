@@ -1,10 +1,15 @@
 class GameBoard
-  attr_accessor :gameboard
+  
 
-  def initialize()
+  def initialize(gameboard)
+    @gameboard = gameboard
+  end
+
+  def gameboard()
     @gameboard = [["[ ]", "[ ]", "[ ]"],
                  ["[ ]", "[ ]", "[ ]"],
-                 ["[ ]", "[ ]", "[ ]"]] 
+                 ["[ ]", "[ ]", "[ ]"]]
+    return @gameboard   
   end
 
 
@@ -17,5 +22,5 @@ class GameBoard
 end
 
 
-game = GameBoard.new()
-game.display_gameboard(gameboard)
+game = GameBoard.new("gameboard")
+game.display_gameboard(game.gameboard())

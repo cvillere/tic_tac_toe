@@ -10,6 +10,22 @@ class GameBoard
     @make_gameboard
   end
 
+  def position_x_check move
+    if @make_gameboard[move[0]][move[1]] != "[ ]"
+      puts "Chose again! Spot already taken!"
+      display_board
+      get_position_x
+    end
+  end
+
+  def position_y_check move
+    if @make_gameboard[move[0]][move[1]] != "[ ]"
+      puts "Chose again! Spot already taken!"
+      display_board
+      get_position_y
+    end
+  end
+
   def get_position_x
     puts "Player 1: Where would you like to put 'x'?"
     puts "Row?"
@@ -44,6 +60,8 @@ class GameBoard
 end
 
 
+
+=begin
 class GamePlayers
 
   def initialize(player_one, player_two)
@@ -79,9 +97,4 @@ class GamePlayers
     board
   end
 end
-
-game = GameBoard.new("make_gameboard")
-players = GamePlayers.new("player_1", "player_2")
-#game.display_make_gameboard(game.make_gameboard())
-players.player_one(game)
-#game.display_make_gameboard(game.make_gameboard())
+=end

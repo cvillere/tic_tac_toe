@@ -1,32 +1,44 @@
 class GameBoard
-  
+  attr_accessor :make_gameboard
 
-  def initialize(gameboard)
-    @gameboard = gameboard
+  def initialize(make_gameboard)
+    @make_gameboard = make_gameboard
 
   end
 
-  def gameboard
-    @gameboard = [["[ ]", "[ ]", "[ ]"],
-                 ["[ ]", "[ ]", "[ ]"],
-                 ["[ ]", "[ ]", "[ ]"]]
-    return @gameboard   
+  def make_gameboard
+    @make_gameboard
   end
 
-=begin
-  def x
-    return @x
+  def get_position_x
+    puts "Player 1: Where would you like to put 'x'?"
+    puts "Row?"
+    puts "Column?"
+    row = gets.to_i
+    column = gets.to_i
+    row = row - 1
+    column = column - 1
+    play = [row, column]
+    @make_gameboard[play[0]][play[1]] = " x "
   end
 
-  def o
-    return @o
+  def get_position_y
+    puts "Player 2: Where would you like to put 'o'?"
+    puts "Row?"
+    puts "Column?"
+    row = gets.to_i
+    column = gets.to_i
+    row = row - 1
+    column = column - 1
+    play = [row, column]
+    @make_gameboard[play[0]][play[1]] = " o "
   end
-=end
 
-  def display_gameboard played_board
+
+  def display_make_gameboard played_board
     #puts played_board.class
     played_board = played_board.each {|x| 
-      puts x.join(" ")
+      puts x.join("")
     }
   end
 end
@@ -50,10 +62,8 @@ class GamePlayers
     row = row - 1
     column = column - 1
     play = [row, column]
-    board.gameboard[play[0]][play[1]] = "x"
-    puts board.gameboard.class
-    puts board.gameboard[play[0]][play[1]]
-    board.display_gameboard(board.gameboard)
+    board.change_make_gameboard_x(play)
+    board.display_make_gameboard(board.make_gameboard)
   end
 
   def player_two(board)
@@ -70,8 +80,8 @@ class GamePlayers
   end
 end
 
-game = GameBoard.new("gameboard")
+game = GameBoard.new("make_gameboard")
 players = GamePlayers.new("player_1", "player_2")
-#game.display_gameboard(game.gameboard())
+#game.display_make_gameboard(game.make_gameboard())
 players.player_one(game)
-#game.display_gameboard(game.gameboard())
+#game.display_make_gameboard(game.make_gameboard())

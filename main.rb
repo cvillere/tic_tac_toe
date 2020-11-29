@@ -53,8 +53,7 @@ class GamePlayers
     board.gameboard[play[0]][play[1]] = "x"
     puts board.gameboard.class
     puts board.gameboard[play[0]][play[1]]
-    #board.display_gameboard()
-    #return board
+    board.display_gameboard(board.gameboard)
   end
 
   def player_two(board)

@@ -74,7 +74,7 @@ class PlayGame
 
   def continue_game gameboard
     nested_array_result = []
-    #puts gameboard
+    puts gameboard
     gameboard.each {|x|
       if x.include?("[ ]") == true
         nested_array_result.push(true)
@@ -87,8 +87,7 @@ class PlayGame
       end
   end
   
-  def play_game
-    puts @board.class
+  def play_game @board
     while continue_game(@board).include?("[ ]") == true do
       winner(@board)
       cats_game(@board)
@@ -159,7 +158,7 @@ initial_board = GameBoard.new([["[ ]","[ ]", "[ ]"],
                               ["[ ]", "[ ]", "[ ]"]])
 
 game = PlayGame.new(initial_board)
-game.play_game
+game.play_game(initial_board)
 
 
 

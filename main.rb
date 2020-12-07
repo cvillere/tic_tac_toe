@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'pry'
 # creates GameBoard class to initiate a tic-tac-toe board
 class GameBoard
   attr_accessor :make_gameboard
@@ -9,10 +9,11 @@ class GameBoard
   end
 
   def position_x_check(move)
-    if @make_gameboard[move[0]][move[1]] != "[ ]"
+    if @make_gameboard[move[0]][move[1]] != '[ ]'
       puts 'Chose again! Spot already taken!'
       display_board
       position_x
+    end
   end
 
   def position_y_check(move)
@@ -45,15 +46,16 @@ class GameBoard
     row -= 1
     column -= 1
     play = [row, column]
+    position_y_check(play)
     @make_gameboard[play[0]][play[1]] = ' o '
   end
 
   def display_board
     # puts played_board.class
-    @make_gameboard = @make_gameboard.each | x |
+    @make_gameboard = @make_gameboard.each{| x |
       puts x.join('')
+    }
   end
-
 end
 
 # This class executes the game
@@ -64,84 +66,91 @@ class PlayGame
     @board = board
   end
 
-=begin
   def continue_game gameboard
     nested_array_result = []
-    puts gameboard
     gameboard.each {|x|
-      if x.include?("[ ]") == true
-        nested_array_result.push(true)
+      if x.include?("[ ]")
+        nested_array_result.push("play on!")
+      else
+        nested_array_result.push("cat's game!")
       end
     }
-      if nested_array_result.any?(true)
-        return true
-      else
-        return false
-      end
+    return nested_array_result
   end
-=end
 
-  def play_game(game)
-    while continue_game(game).include?('[ ]') == true do
-      winner(game)
-      cats_game(game)
-      game.display_board
-      game.position_x
-      game.display_board
-      winner(game)
-      cats_game(game)
-      game.position_y
-      game.display_board
-      winner(game)
-      cats_game(game)
+  def play_game
+    while continue_game(@board.make_gameboard).include?("play on!") do
+      @board.display_board
+      @board.position_x
+      @board.display_board
+      if winner(@board.make_gameboard) == 'player_one won the game!!' || 
+         winner(@board.make_gameboard) == 'player_two won the game!!'
+        break
+      end
+      if cats_game(@board.make_gameboard) == "cats game!"
+        puts "cat's game"
+        break
+      end
+      @board.position_y
+      if winner(@board.make_gameboard) == 'player_one won the game!!' || 
+        winner(@board.make_gameboard) == 'player_two won the game!!'
+        break
+      end
+      if cats_game(@board.make_gameboard) == "cats game!"
+        puts "cat's game"
+        break
+      end
+      # binding.pry
     end
   end
 
   private
 
-  def cats_game(game_board)
-    nested_array_result = []
-    game_board.each | x |
-      if x.include?('[ ]') == false
-        nested_array_result.push(true)
+  def cats_game(game)
+    cats_result = []
+    game.each { | x |
+      if x.include?('[ ]')
+        cats_result.push("play")
+      else
+        cats_result.push("cats")
       end
-    
-    if nested_array_result.all?(true)
-      puts "cat's game!"
+      }
+    if cats_result.all?("cats")
+      return "cats game!"
     end
   end
 
   def winner(game)
-    for i in 1..3
-      if game[i][1] && game[i][2] && game[i][3] == 'x'
-        puts 'player_one won the game!!'
+    for i in 0..2 do
+      if game[i][0] == 'x' && game[i][1] == 'x' && game[i][2] == 'x'
+        return 'player_one won the game!!'
       end
-      if game[i][1] && game[i][2] && game[i][3] == 'o'
-        puts 'player_two won the game!!'
-      end
-    end
-    for i in 1..3
-      if game[1][i] && game[2][i] && game[3][i] == 'x'
-        puts 'player_one won the game!!'
-      end
-      if game[1][i] && game[2][i] && game[3][i] == 'o'
-        puts 'player_two won the game!!'
+      if game[i][0] == 'o' && game[i][1] == 'o' && game[i][2] == 'o'
+        return 'player_two won the game!!'
       end
     end
-    for i in 1..3
-      if game[i][i] && game[i][i] && game[i][i] == 'x'
-        puts 'player_one won the game!!'
+    for i in 0..2 do
+      if game[0][i] == 'x' && game[1][i] == 'x' && game[2][i] == 'x'
+        return 'player_one won the game!!'
       end
-      if game[i][i] && game[i][i] && game[i][i] == 'o'
-        puts 'player_two won the game!!'
+      if game[0][i] == 'o' && game[1][i] == 'o' && game[2][i] == 'o'
+        return 'player_two won the game!!'
       end
     end
 
-    if game[3][1] && game[2][2] && game[1][3] == 'x'
-      puts 'player_one won the game!!'
+    if game[0][0] == 'x' && game[1][1] == 'x' && game[2][2] == 'x'
+      return 'player_one won the game!!'
+    end 
+    if game[0][0] == 'o' && game[1][1] == 'o' && game[2][2] == 'o'
+      return 'player_two won the game!!'
     end
-    if game[3][1] && game[2][2] && game[1][3] == 'o'
-      puts 'player_two won the game!!'
+  
+
+    if game[2][0] == 'x' && game[1][1] = 'x' && game[0][2] == 'x'
+      return 'player_one won the game!!'
+    end
+    if game[2][0] == 'o' && game[1][1] == 'o' && game[0][2] == 'o'
+      return 'player_two won the game!!'
     end
   end
 end
@@ -152,6 +161,7 @@ initial_board = GameBoard.new([['[ ]', '[ ]', '[ ]'],
 
 game = PlayGame.new(initial_board)
 game.play_game
+
 =begin
 class GamePlayers
 

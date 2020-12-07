@@ -85,22 +85,23 @@ class PlayGame
       @board.display_board
       if winner(@board.make_gameboard) == 'player_one won the game!!' || 
          winner(@board.make_gameboard) == 'player_two won the game!!'
+         puts winner(@board.make_gameboard)  
         break
       end
       if cats_game(@board.make_gameboard) == "cats game!"
-        puts "cat's game"
+        puts cats_game(@board.make_gameboard)
         break
       end
       @board.position_y
       if winner(@board.make_gameboard) == 'player_one won the game!!' || 
         winner(@board.make_gameboard) == 'player_two won the game!!'
+        puts winner(@board.make_gameboard)
         break
       end
       if cats_game(@board.make_gameboard) == "cats game!"
-        puts "cat's game"
+        puts cats_game(@board.make_gameboard)
         break
       end
-      # binding.pry
     end
   end
 
@@ -122,34 +123,33 @@ class PlayGame
 
   def winner(game)
     for i in 0..2 do
-      if game[i][0] == 'x' && game[i][1] == 'x' && game[i][2] == 'x'
+      if game[i][0] == ' x ' && game[i][1] == ' x ' && game[i][2] == ' x '
         return 'player_one won the game!!'
       end
-      if game[i][0] == 'o' && game[i][1] == 'o' && game[i][2] == 'o'
+      if game[i][0] == ' o ' && game[i][1] == ' o ' && game[i][2] == ' o '
         return 'player_two won the game!!'
       end
     end
     for i in 0..2 do
-      if game[0][i] == 'x' && game[1][i] == 'x' && game[2][i] == 'x'
+      if game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
         return 'player_one won the game!!'
       end
-      if game[0][i] == 'o' && game[1][i] == 'o' && game[2][i] == 'o'
+      if game[0][i] == ' o ' && game[1][i] == ' o ' && game[2][i] == ' o '
         return 'player_two won the game!!'
       end
     end
 
-    if game[0][0] == 'x' && game[1][1] == 'x' && game[2][2] == 'x'
+    if game[0][0] == ' x ' && game[1][1] == ' x ' && game[2][2] == ' x '
       return 'player_one won the game!!'
     end 
-    if game[0][0] == 'o' && game[1][1] == 'o' && game[2][2] == 'o'
+    if game[0][0] == ' o ' && game[1][1] == ' o ' && game[2][2] == ' o '
       return 'player_two won the game!!'
     end
   
-
-    if game[2][0] == 'x' && game[1][1] = 'x' && game[0][2] == 'x'
+    if game[2][0] == ' x ' && game[1][1] = ' x ' && game[0][2] == ' x '
       return 'player_one won the game!!'
     end
-    if game[2][0] == 'o' && game[1][1] == 'o' && game[0][2] == 'o'
+    if game[2][0] == ' o ' && game[1][1] == ' o ' && game[0][2] == ' o '
       return 'player_two won the game!!'
     end
   end

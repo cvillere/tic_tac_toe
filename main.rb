@@ -14,19 +14,16 @@ instance variable
 =end
 
 # frozen_string_literal: true
+
 require 'pry'
-
+#creates GameBoard class to initiate a tic-tac-toe board
 class Board
-  attr_accessor :first_row, :second_row, :third_row, 
-  :game_board
+  attr_accessor :game_board
 
-  def initialize first_row, second_row, third_row, game_board
-    @first_row = [' ', ' ', ' ']
-    @second_row = [' ', ' ', ' ']
-    @third_row = [' ', ' ', ' ']
-    @game_board = [@first_row,
-                   @second_row,
-                   @third_row]
+  def initialize()
+    @game_board = [' ', ' ', ' ',
+                   ' ', ' ', ' ',
+                   ' ', ' ', ' ']
   end
 
   def display_board(game_board)
@@ -42,10 +39,10 @@ class Board
     row -= 1
     column -= 1
     play = [row, column]
-    if @game_board[play[0]][play[1]] != ' ' 
+    if @game_board[play[0]][play[1]] != ' '
       puts 'Chose again! Spot already taken!'
     else
       @game_board[play[0]][play[1]] = ' x '
+    end
   end
-
 end

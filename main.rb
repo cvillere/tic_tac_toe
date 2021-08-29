@@ -20,14 +20,15 @@ require 'pry'
 class Board
   attr_accessor :game_board
 
-  def initialize()
-    @game_board = ['[ ]', '[ ]', '[ ]',
-                   '[ ]', '[ ]', '[ ]',
-                   '[ ]', '[ ]', '[ ]']
+  def initialize(game_board)
+    @game_board = game_board
   end
 
-  def display_board(game_board)
-    p game_board
+  def display_board
+    # puts played_board.class
+    @game_board = @game_board.each{| x |
+      puts x.join('')
+    }
   end
 
   def move_player_x(game_board)
@@ -39,7 +40,7 @@ class Board
     row -= 1
     column -= 1
     play = [row, column]
-    check_move_x(@game_board, play)
+    check_move_x(game_board, play)
   end
 
   def check_move_x(game_board, move_spot)
@@ -50,6 +51,10 @@ class Board
     end
     display_board(game_board)
   end
-
-
 end
+
+new_board = Board.new([['[ ]', '[ ]', '[ ]'],
+                       ['[ ]', '[ ]', '[ ]'],
+                       ['[ ]', '[ ]', '[ ]']])
+new_board.display_board()
+new_board.move_player_x(@game_board)

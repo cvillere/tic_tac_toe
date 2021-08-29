@@ -75,6 +75,18 @@ class Board
 
 end
 
+class PlayGame < Board
+
+  def game_play
+    while @game_board.include?('[ ]')
+      Board.display_board()
+      Board.move_player_x()
+      Board.move_player_o()
+    end
+    
+end
+
+
 new_board = Board.new([['[ ]', '[ ]', '[ ]'],
                        ['[ ]', '[ ]', '[ ]'],
                        ['[ ]', '[ ]', '[ ]']])

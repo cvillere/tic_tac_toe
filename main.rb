@@ -31,8 +31,8 @@ class Board
     }
   end
 
-  def move_player_x(game_board)
-    puts 'Player 1: Where would you like to put "x"?'
+  def move_player_x
+    puts 'Player X: Where would you like to put "x"?'
     puts 'Row?'
     puts 'Column?'
     row = gets.to_i
@@ -40,21 +40,44 @@ class Board
     row -= 1
     column -= 1
     play = [row, column]
-    check_move_x(game_board, play)
+    check_move_x(@game_board, play)
   end
 
   def check_move_x(game_board, move_spot)
-    if game_board[move_spot[0]][move_spot[1]] != ' '
+    if game_board[move_spot[0]][move_spot[1]] != '[ ]'
       puts 'Chose again! Spot already taken!'
     else
       game_board[move_spot[0]][move_spot[1]] = ' x '
     end
-    display_board(game_board)
+    display_board()
   end
+
+  def move_player_o
+    puts 'Player O: Where would you like to put "o"?'
+    puts 'Row?'
+    puts 'Column?'
+    row = gets.to_i
+    column = gets.to_i
+    row -= 1
+    column -= 1
+    play = [row, column]
+    check_move_o(@game_board, play)
+  end
+
+  def check_move_o(game_board, move_spot)
+    if game_board[move_spot[0]][move_spot[1]] != '[ ]'
+      puts 'Chose again! Spot already taken!'
+    else
+      game_board[move_spot[0]][move_spot[1]] = ' o '
+    end
+    display_board()
+  end
+
 end
 
 new_board = Board.new([['[ ]', '[ ]', '[ ]'],
                        ['[ ]', '[ ]', '[ ]'],
                        ['[ ]', '[ ]', '[ ]']])
 new_board.display_board()
-new_board.move_player_x(@game_board)
+new_board.move_player_x()
+new_board.move_player_o()

@@ -82,14 +82,46 @@ class PlayGame < Board
       Board.display_board()
       Board.move_player_x()
       Board.move_player_o()
+      winner(@game_board)
     end
-    
+
+
+  def winner(game)
+    for i in 0..2 do
+      if game[i][0] == ' x ' && game[i][1] == ' x ' && game[i][2] == ' x '
+        return 'player_x won the game!!'
+      end
+      if game[i][0] == ' o ' && game[i][1] == ' o ' && game[i][2] == ' o '
+        return 'player_o won the game!!'
+      end
+    end
+    for i in 0..2 do
+      if game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
+        return 'player_x won the game!!'
+      end
+      if game[0][i] == ' o ' && game[1][i] == ' o ' && game[2][i] == ' o '
+        return 'player_o won the game!!'
+      end
+    end
+      if game[0][0] == ' x ' && game[1][1] == ' x ' && game[2][2] == ' x '
+        return 'player_x won the game!!'
+      end 
+      if game[0][0] == ' o ' && game[1][1] == ' o ' && game[2][2] == ' o '
+        return 'player_o won the game!!'
+      end
+      if game[2][0] == ' x ' && game[1][1] = ' x ' && game[0][2] == ' x '
+        return 'player_x won the game!!'
+      end
+      if game[2][0] == ' o ' && game[1][1] == ' o ' && game[0][2] == ' o '
+        return 'player_o won the game!!'
+      end
+    end
 end
 
 
 new_board = Board.new([['[ ]', '[ ]', '[ ]'],
                        ['[ ]', '[ ]', '[ ]'],
                        ['[ ]', '[ ]', '[ ]']])
-new_board.display_board()
-new_board.move_player_x()
-new_board.move_player_o()
+
+game = PlayGame.new(new_board)
+game.game_play

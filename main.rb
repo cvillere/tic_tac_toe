@@ -66,7 +66,6 @@ class Board
     }
     return nested_array_result
   end
-
 end
 
 class PlayGame < Board
@@ -147,36 +146,45 @@ class GamePlay < PlayGame
   def row_win(game)
     for i in 0..2 do
       if game[i][0] == ' x ' && game[i][1] == ' x ' && game[i][2] == ' x '
-        return 'player_one won the game!!'
+        puts 'player_X won the game!!'
+        exit
       end
       if game[i][0] == ' o ' && game[i][1] == ' o ' && game[i][2] == ' o '
-        return 'player_two won the game!!'
+        puts 'player_O won the game!!'
+        exit
       end
     end
+  end
 
   def column_win(game)
     for i in 0..2 do
       if game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
-        return 'player_one won the game!!'
+        puts 'player_X won the game!!'
+        exit
       end
       if game[0][i] == ' o ' && game[1][i] == ' o ' && game[2][i] == ' o '
-        return 'player_two won the game!!'
+        puts 'player_O won the game!!'
+        exit
       end
     end
   end
   
   def cross_win(game)
     if game[0][0] == ' x ' && game[1][1] == ' x ' && game[2][2] == ' x '
-      return 'player_X won the game!!'
+      puts 'player_X won the game!!'
+      exit
     end 
     if game[0][0] == ' o ' && game[1][1] == ' o ' && game[2][2] == ' o '
-      return 'player_O won the game!!'
+      puts 'player_O won the game!!'
+      exit
     end
-    if game[2][0] == ' x ' && game[1][1] = ' x ' && game[0][2] == ' x '
-      return 'player_X won the game!!'
+    if game[2][0] == ' x ' && game[1][1] == ' x ' && game[0][2] == ' x '
+      puts 'player_X won the game!!'
+      exit
     end
     if game[2][0] == ' o ' && game[1][1] == ' o ' && game[0][2] == ' o '
-      return 'player_O won the game!!'
+      puts 'player_O won the game!!'
+      exit
     end
   end
 

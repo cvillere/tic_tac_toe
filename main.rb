@@ -128,22 +128,23 @@ class GamePlay < PlayGame
   def add_x_o
     while continue_game(@gameboard).all?("cat's game!") == false do
       add_x()
+      check_winner(@gameboard)
       if continue_game(@gameboard).all?("cat's game!") == true
         display_board()
-        check_winner(@gameboard)
         return cats_game(@gameboard)
       end
 
       add_o()
+      check_winner(@gameboard)
       if continue_game(@gameboard).all?("cat's game!") == true
         display_board()
-        check_winner(@gameboard)
         return cats_game(@gameboard)
       end
     end
   end
 
   def row_win(game)
+    display_board()
     for i in 0..2 do
       if game[i][0] == ' x ' && game[i][1] == ' x ' && game[i][2] == ' x '
         puts 'player_X won the game!!'
@@ -157,6 +158,7 @@ class GamePlay < PlayGame
   end
 
   def column_win(game)
+    display_board()
     for i in 0..2 do
       if game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
         puts 'player_X won the game!!'
@@ -170,6 +172,7 @@ class GamePlay < PlayGame
   end
   
   def cross_win(game)
+    display_board()
     if game[0][0] == ' x ' && game[1][1] == ' x ' && game[2][2] == ' x '
       puts 'player_X won the game!!'
       exit

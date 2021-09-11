@@ -1,20 +1,3 @@
-=begin
-instance method
-----Making a playerX move
-----Making a playerY move
-----Displaying the gameboard
-
-class
-----the board
-
-instance variable
-----1st row of the board
-----2nd row of the board
-----3rd row of the board
-=end
-
-# frozen_string_literal: true
-
 require 'pry'
 # creates GameBoard class to initiate a tic-tac-toe board
 class Board
@@ -144,13 +127,14 @@ class GamePlay < PlayGame
   end
 
   def row_win(game)
-    display_board()
     for i in 0..2 do
       if game[i][0] == ' x ' && game[i][1] == ' x ' && game[i][2] == ' x '
+        display_board()
         puts 'player_X won the game!!'
         exit
       end
       if game[i][0] == ' o ' && game[i][1] == ' o ' && game[i][2] == ' o '
+        display_board()
         puts 'player_O won the game!!'
         exit
       end
@@ -158,13 +142,14 @@ class GamePlay < PlayGame
   end
 
   def column_win(game)
-    display_board()
     for i in 0..2 do
       if game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
+        display_board()
         puts 'player_X won the game!!'
         exit
       end
       if game[0][i] == ' o ' && game[1][i] == ' o ' && game[2][i] == ' o '
+        display_board()
         puts 'player_O won the game!!'
         exit
       end
@@ -172,20 +157,23 @@ class GamePlay < PlayGame
   end
   
   def cross_win(game)
-    display_board()
     if game[0][0] == ' x ' && game[1][1] == ' x ' && game[2][2] == ' x '
+      display_board()
       puts 'player_X won the game!!'
       exit
     end 
     if game[0][0] == ' o ' && game[1][1] == ' o ' && game[2][2] == ' o '
+      display_board()
       puts 'player_O won the game!!'
       exit
     end
     if game[2][0] == ' x ' && game[1][1] == ' x ' && game[0][2] == ' x '
+      display_board()
       puts 'player_X won the game!!'
       exit
     end
     if game[2][0] == ' o ' && game[1][1] == ' o ' && game[0][2] == ' o '
+      display_board()
       puts 'player_O won the game!!'
       exit
     end

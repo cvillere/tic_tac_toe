@@ -51,19 +51,19 @@ end
 # Class that does game play moves
 class PlayGame < Board
   def position_x_check(move)
-    if @gameboard[move[0]][move[1]] != '[ ]'
-      puts 'Chose again! Spot already taken!'
-      display_board
-      position_x
-    end
+    return unless @gameboard[move[0]][move[1]] != '[ ]'
+
+    puts 'Chose again! Spot already taken!'
+    display_board
+    position_x
   end
 
   def position_o_check(move)
-    if @gameboard[move[0]][move[1]] != '[ ]'
-      puts 'Chose again! Spot already taken!'
-      display_board
-      position_o
-    end
+    return unless @gameboard[move[0]][move[1]] != '[ ]'
+
+    puts 'Chose again! Spot already taken!'
+    display_board
+    position_o
   end
 
   def position_x
@@ -123,13 +123,18 @@ class GamePlay < PlayGame
     end
   end
 
-  def row_win(game)
+  def row_win_x(game)
     (0..2).each do |i|
-      if game[i][0] == ' x ' && game[i][1] == ' x ' && game[i][2] == ' x '
-        display_board
-        puts 'player_X won the game!!'
-        exit
-      end
+      next unless game[i][0] == ' x ' && game[i][1] == ' x ' && game[i][2] == ' x '
+
+      display_board
+      puts 'player_X won the game!!'
+      exit
+    end
+  end
+
+  def row_win_o(game)
+    (0..2).each do |i|
       next unless game[i][0] == ' o ' && game[i][1] == ' o ' && game[i][2] == ' o '
 
       display_board
@@ -154,23 +159,23 @@ class GamePlay < PlayGame
   end
 
   def cross_win_x_left(game)
-    if game[0][0] == ' x ' && game[1][1] == ' x ' && game[2][2] == ' x '
-      display_board
-      puts 'player_X won the game!!'
-      exit
-    end
+    return unless game[0][0] == ' x ' && game[1][1] == ' x ' && game[2][2] == ' x '
+
+    display_board
+    puts 'player_X won the game!!'
+    exit
   end
 
   def cross_win_x_right(game)
     return unless game[2][0] == ' x ' && game[1][1] == ' x ' && game[0][2] == ' x '
-      display_board
-      puts 'player_X won the game!!'
-      exit
-    end
+
+    display_board
+    puts 'player_X won the game!!'
+    exit
   end
 
   def cross_win_o_left(game)
-    return unless game[0][0] == ' o ' && game[1][1] == ' o ' && game[2][2] == ' o '
+    if game[0][0] == ' o ' && game[1][1] == ' o ' && game[2][2] == ' o '
       display_board
       puts 'player_O won the game!!'
       exit
@@ -186,7 +191,8 @@ class GamePlay < PlayGame
   end
 
   def check_winner(game)
-    row_win(game)
+    row_win_x(game)
+    row_win_o(game)
     column_win(game)
     cross_win_x_left(game)
     cross_win_x_right(game)

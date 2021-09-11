@@ -143,18 +143,23 @@ class GamePlay < PlayGame
     end
   end
 
-  def column_win(game)
+  def column_win_x(game)
     (0..2).each do |i|
-      if game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
+      next unless game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
         display_board
         puts 'player_X won the game!!'
         exit
       end
-      next unless game[0][i] == ' o ' && game[1][i] == ' o ' && game[2][i] == ' o '
+    end
+  end
 
-      display_board
-      puts 'player_O won the game!!'
-      exit
+  def column_win_o(game)
+    (0..2).each do |i|
+      next unless game[0][i] == ' x ' && game[1][i] == ' x ' && game[2][i] == ' x '
+        display_board
+        puts 'player_X won the game!!'
+        exit
+      end
     end
   end
 
@@ -193,7 +198,8 @@ class GamePlay < PlayGame
   def check_winner(game)
     row_win_x(game)
     row_win_o(game)
-    column_win(game)
+    column_win_x(game)
+    column_win_o(game)
     cross_win_x_left(game)
     cross_win_x_right(game)
     cross_win_o_left(game)
